@@ -34,7 +34,7 @@ namespace Devops.Controllers
             {
 
             }
-            return new string[] { "message", "Hello Juan Perez your message will be send." };
+            return new string[] { "message", "Hello Juan Perez your message will be sen." };
         }
 
         // PUT api/<DevopsController>/5
