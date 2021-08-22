@@ -1,0 +1,35 @@
+trigger:
+  branches:
+    include:
+    - refs/heads/master
+  paths:
+    include:
+    - /
+  batch: True
+name: $(date:yyyyMMdd)$(rev:.r)
+jobs:
+- job: Phase_1
+  displayName: Agent job 1
+  timeoutInMinutes: 0
+  pool:
+    vmImage: ubuntu-16.04
+  steps:
+  - checkout: self
+  - task: Docker@0
+    displayName: Build an image
+    inputs:
+      azureSubscriptionEndpoint: 7c73d86c-c2cd-44c8-8977-97a96484048f
+      azureContainerRegistry: '{"loginServer":"novadevops1.azurecr.io", "id" : "/subscriptions/6479453d-573d-4826-9259-1f79115db9f5/resourceGroups/AZ-RG-DEVOPS/providers/Microsoft.ContainerRegistry/registries/novadevops1"}'
+      dockerFile: Devops/Dockerfile
+      defaultContext: False
+      context: $(System.DefaultWorkingDirectory)
+      imageName: novadevops1/devops:$(Build.BuildId)
+  - task: Docker@0
+    displayName: Push an image
+    inputs:
+      azureSubscriptionEndpoint: 7c73d86c-c2cd-44c8-8977-97a96484048f
+      azureContainerRegistry: '{"loginServer":"novadevops1.azurecr.io", "id" : "/subscriptions/6479453d-573d-4826-9259-1f79115db9f5/resourceGroups/AZ-RG-DEVOPS/providers/Microsoft.ContainerRegistry/registries/novadevops1"}'
+      action: Push an image
+      dockerFile: Devops/Dockerfile
+      imageName: novadevops1/devops:$(Build.BuildId)
+...
