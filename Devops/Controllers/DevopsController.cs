@@ -30,23 +30,10 @@ namespace Devops.Controllers
         [HttpPost]
         public IEnumerable<string> Post()
         {
-            if (true)
-            {
-
-            }
-            return new string[] { "message", "Hello Juan Perez your message will be sen." };
+           
+            return new string[] { "message", "Hello Juan Perez your message will be send.." };
         }
 
-        // PUT api/<DevopsController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<DevopsController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+       
     }
 }
